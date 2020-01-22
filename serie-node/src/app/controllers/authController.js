@@ -71,11 +71,13 @@ router.post('/forgot_password', async (req, res) => {
         mailer.sendMail({
             to: email,
             from: 'yara.lira@cbyk.com.br',
-            template: "auth/forgot_password",
+            template: "../../resources/mail/auth/forgot_password",
             context: { token },
         }, (err) => {
-            if (err)
-            return res.status(400).send({error: 'Cannot send forgot password email'});
+            if (err){
+            console.log(err)
+                return res.status(400).send({error: 'Cannot send forgot password email'});
+            }
             
             return res.send();
         })
